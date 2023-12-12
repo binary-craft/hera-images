@@ -18,13 +18,13 @@ jobs:
       - name: Build and push hera-builder
         uses: docker/build-push-action@v5
         with:
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           push: false
           target: hera-builder
 
       - name: Build and push hera-runner
         uses: docker/build-push-action@v5
         with:
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           push: false
           target: hera-runner
