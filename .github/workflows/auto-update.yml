@@ -5,28 +5,37 @@ on:
   workflow_dispatch:
 
 jobs:
-  auto-update:
-    name: Auto update
+  check-updates:
+    name: Check for updates
     runs-on: ubuntu-latest
     outputs:
       needs-updating: ${{ steps.check.outputs.needs-updating }}
     steps:
       - name: Check if update available
         id: check
-        uses: lucacome/docker-image-update-checker@v1
+        uses: lucacome/docker-image-update-checker@v1.2.1
         with:
           base-image: ubuntu:jammy
           image: pimhuisman/hera-runner:jammy
           platforms: linux/amd64,linux/arm64
-
-      - name: Start build and push
-        if: ${{ steps.check.outputs.needs-updating }}
         env:
-          GH_TOKEN: ${{ github.token }}
+          DEBUG: true
+
+  auto-update:
+    name: Auto update
+    runs-on: ubuntu-latest
+    needs: check-updates
+    if: ${{ needs.check-updates.outputs.needs-updating == 'true' }}
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Run build and push
         run: gh workflow run build-and-push.yml
-
-      - name: Start Snyk scan
-        if: ${{ steps.check.outputs.needs-updating }}
         env:
           GH_TOKEN: ${{ github.token }}
+
+      - name: Run Snyk scan
         run: gh workflow run snyk-scan.yml
+        env:
+          GH_TOKEN: ${{ github.token }}
