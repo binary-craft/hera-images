@@ -10,6 +10,7 @@ on:
 
 jobs:
   snyk:
+    name: Snyk scan
     permissions:
       contents: read
       security-events: write
