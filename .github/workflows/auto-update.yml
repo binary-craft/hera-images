@@ -21,8 +21,12 @@ jobs:
 
       - name: Start build and push
         if: ${{ steps.check.outputs.needs-updating }}
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: gh workflow run build-and-push.yml
 
       - name: Start Snyk scan
         if: ${{ steps.check.outputs.needs-updating }}
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: gh workflow run snyk-scan.yml
