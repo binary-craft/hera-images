@@ -1,4 +1,8 @@
-# Hera CNB images for native (C and C++) 
+# Hera CNB images for native (C and C++)
+[![Build and push](https://github.com/pim-huisman/hera-images/actions/workflows/build-and-push.yml/badge.svg)](https://github.com/pim-huisman/hera-images/actions/workflows/build-and-push.yml) 
+[![Snyk scan](https://github.com/pim-huisman/hera-images/actions/workflows/snyk-scan.yml/badge.svg)](https://github.com/pim-huisman/hera-images/actions/workflows/snyk-scan.yml) 
+[![Auto update on Ubuntu release](https://github.com/pim-huisman/hera-images/actions/workflows/auto-update.yml/badge.svg)](https://github.com/pim-huisman/hera-images/actions/workflows/auto-update.yml)
+
 ## About
 This project is used to build Cloud Native Buildpack ready images for native applications such as C and C++.
 
