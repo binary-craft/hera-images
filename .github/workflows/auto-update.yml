@@ -18,6 +18,7 @@ jobs:
           base-image: ubuntu:jammy
           image: pimhuisman/hera-runner:jammy
           platforms: linux/amd64,linux/arm64
+          debug: true
 
       - name: Start build and push
         if: ${{ steps.check.outputs.needs-updating }}
