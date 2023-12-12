@@ -18,16 +18,17 @@ jobs:
           base-image: ubuntu:jammy
           image: pimhuisman/hera-runner:jammy
           platforms: linux/amd64,linux/arm64
-          debug: true
+        env:
+          DEBUG: true
 
       - name: Start build and push
         if: ${{ steps.check.outputs.needs-updating }}
+        run: gh workflow run build-and-push.yml
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run build-and-push.yml
 
       - name: Start Snyk scan
         if: ${{ steps.check.outputs.needs-updating }}
+        run: gh workflow run snyk-scan.yml
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run snyk-scan.yml
