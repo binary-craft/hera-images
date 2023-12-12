@@ -1,5 +1,4 @@
 name: Snyk scan
-
 on:
   push:
     branches: [main]

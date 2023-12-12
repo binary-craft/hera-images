@@ -1,0 +1,28 @@
+name: Auto update on Ubuntu release
+on:
+  schedule:
+    - cron: '25 * * * *'
+  workflow_dispatch:
+
+jobs:
+  auto-update:
+    name: Auto update
+    runs-on: ubuntu-latest
+    outputs:
+      needs-updating: ${{ steps.check.outputs.needs-updating }}
+    steps:
+      - name: Check if update available
+        id: check
+        uses: lucacome/docker-image-update-checker@v1
+        with:
+          base-image: ubuntu:jammy
+          image: pimhuisman/hera-runner:jammy
+          platforms: linux/amd64,linux/arm64
+
+      - name: Start build and push
+        if: ${{ steps.check.outputs.needs-updating }}
+        run: gh workflow run build-and-push.yml
+
+      - name: Start Snyk scan
+        if: ${{ steps.check.outputs.needs-updating }}
+        run: gh workflow run snyk-scan.yml
