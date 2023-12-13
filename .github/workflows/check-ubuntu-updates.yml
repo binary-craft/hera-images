@@ -1,7 +1,7 @@
-name: Auto update on Ubuntu release
+name: Check for Ubuntu updates
 on:
   schedule:
-    - cron: '25 * * * *'
+    - cron: '25 */4 * * *'
   workflow_dispatch:
 
 jobs:
