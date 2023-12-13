@@ -1,6 +1,9 @@
 # Base image
 FROM ubuntu:jammy AS hera-base
 
+LABEL io.buildpacks.stack.id="com.github.pimhuisman.stacks.hera"
+ENV CNB_STACK_ID="com.github.pimhuisman.stacks.hera"
+
 # Set default entrypoint (will be overriden in case of buildpack)
 ENTRYPOINT ["/bin/bash"]
 
