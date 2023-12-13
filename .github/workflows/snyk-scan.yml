@@ -2,6 +2,7 @@ name: Snyk scan
 on:
   push:
     branches: [main]
+    paths-ignore: ['**.md', '.gitignore', 'LICENSE']
   pull_request:
     branches: [main]
   schedule:
