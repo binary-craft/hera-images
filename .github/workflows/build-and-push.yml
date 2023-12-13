@@ -13,6 +13,10 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v4
 
+      - name: Get current date
+        id: date
+        run: echo "{date}={$(date +'%Y%m%d')}" >> $GITHUB_OUTPUT
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -27,7 +31,7 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: pimhuisman/hera-builder:jammy
+          tags: ${{ vars.DOCKER_NAMESPACE }}/hera-builder:jammy,${{ vars.DOCKER_NAMESPACE }}/hera-builder:jammy-${{ steps.date.outputs.date }}
           target: hera-builder
 
       - name: Build and push hera-runner
@@ -35,5 +39,5 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: pimhuisman/hera-runner:jammy
+          tags: ${{ vars.DOCKER_NAMESPACE }}/hera-runner:jammy,${{ vars.DOCKER_NAMESPACE }}/hera-runner:jammy-${{ steps.date.outputs.date }}
           target: hera-runner

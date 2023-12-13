@@ -16,7 +16,7 @@ jobs:
         uses: lucacome/docker-image-update-checker@v1.2.1
         with:
           base-image: ubuntu:jammy
-          image: pimhuisman/hera-runner:jammy
+          image: ${{ vars.DOCKER_NAMESPACE }}/hera-runner:jammy
           platforms: linux/amd64,linux/arm64
         env:
           DEBUG: true
