@@ -16,7 +16,7 @@ ARG cnb_uid=1002
 
 # Create group and user
 RUN groupadd -g ${cnb_gid} cnb
-RUN useradd -rms /bin/bash -u ${cnb_uid} -g ${cnb_gid} cpp
+RUN useradd -rms /bin/bash -u ${cnb_uid} -g ${cnb_gid} hera
 
 # Set user
 USER ${cnb_uid}:${cnb_gid}
@@ -25,29 +25,31 @@ USER ${cnb_uid}:${cnb_gid}
 # Builder image
 FROM hera-base AS hera-builder
 
-ARG apt_get_dependencies="clang jq make python3 pipx"
+ARG apt_get_build_dependencies="clang make"
 ARG apt_get_parameters="-y --no-install-recommends"
+ARG apt_get_system_dependencies="jq python3 pipx"
 ARG cnb_gid=1000
 ARG cnb_uid=1001
 ARG pip_requirements_file="requirements.txt"
 
 # Install apt-get dependencies
 RUN apt-get update ${apt_get_parameters}
-RUN apt-get install ${apt_get_parameters} ${apt_get_dependencies}
+RUN apt-get install ${apt_get_parameters} ${apt_get_system_dependencies} ${apt_get_build_dependencies}
 
 # Create group and user
 ENV CNB_GROUP_ID=${cnb_gid}
 ENV CNB_USER_ID=${cnb_uid}
 RUN groupadd -g ${cnb_gid} cnb
-RUN useradd -rms /bin/bash -u ${CNB_USER_ID} -g ${CNB_GROUP_ID} cpp
+RUN useradd -rms /bin/bash -u ${CNB_USER_ID} -g ${CNB_GROUP_ID} hera
 
 # Set user and path
 USER ${CNB_USER_ID}:${CNB_GROUP_ID}
-ENV PATH "/home/cpp/.local/bin:${PATH}"
+ENV PATH "/home/hera/.local/bin:${PATH}"
+WORKDIR /home/hera
 
 # Install pip dependencies
-COPY $pip_requirements_file ./
+COPY $pip_requirements_file .
 RUN xargs -I % pipx install "%" < requirements.txt
 
 # Detect Conan profile
-RUN conan --version && conan profile detect
+RUN conan profile detect
