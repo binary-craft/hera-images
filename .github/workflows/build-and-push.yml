@@ -28,18 +28,18 @@ jobs:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push hera-builder
+      - name: Build and push hera-builder-base
         uses: docker/build-push-action@v5
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ vars.DOCKER_NAMESPACE }}/hera-builder:jammy,${{ vars.DOCKER_NAMESPACE }}/hera-builder:jammy-${{ steps.date.outputs.date }}
-          target: hera-builder
+          tags: ${{ vars.DOCKER_NAMESPACE }}/hera-builder-base:jammy,${{ vars.DOCKER_NAMESPACE }}/hera-builder-base:jammy-${{ steps.date.outputs.date }}
+          target: hera-builder-base
 
-      - name: Build and push hera-runner
+      - name: Build and push hera-runner-base
         uses: docker/build-push-action@v5
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ vars.DOCKER_NAMESPACE }}/hera-runner:jammy,${{ vars.DOCKER_NAMESPACE }}/hera-runner:jammy-${{ steps.date.outputs.date }}
-          target: hera-runner
+          tags: ${{ vars.DOCKER_NAMESPACE }}/hera-runner-base:jammy,${{ vars.DOCKER_NAMESPACE }}/hera-runner-base:jammy-${{ steps.date.outputs.date }}
+          target: hera-runner-base

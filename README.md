@@ -22,24 +22,24 @@ With the builder image you can use your favourite builder and packaging software
 The published images will be made available on Docker hub. This project contains the source and is used to build the images.
 
 ### Builder image
-See [Docker hub](https://hub.docker.com/r/pimhuisman/hera-builder).
+See [Docker hub](https://hub.docker.com/r/pimhuisman/hera-builder-base).
 
-```docker pull pimhuisman/hera-builder:jammy```
+```docker pull pimhuisman/hera-builder-base:jammy```
 
 ### Runner image
-See [Docker hub](https://hub.docker.com/r/pimhuisman/hera-runner).
+See [Docker hub](https://hub.docker.com/r/pimhuisman/hera-runner-base).
 
-```docker pull pimhuisman/hera-runner:jammy```
+```docker pull pimhuisman/hera-runner-base:jammy```
 
 ## Building the images
 There are three stages within the Dockerfile:
 - **hera-base** - common base stage for the builder and runner, not used directly
-- **hera-builder** - stage to create the builder image
-- **hera-runner** - stage to create the runner image
+- **hera-builder-base** - stage to create the base builder image
+- **hera-runner-base** - stage to create the base runner image
 
-For example, to build `hera-runner` the following command can be issued:
+For example, to build `hera-runner-base` the following command can be issued:
 
-```docker build --target hera-runner -t myrepo/hera-runner:mytag .```
+```docker build --target hera-runner-base -t myrepo/hera-runner-base:mytag .```
 
 ### Arguments to pass to Docker
 Both relevant stages have some arguments that can be passed to customise the build.

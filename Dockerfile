@@ -9,7 +9,7 @@ ENTRYPOINT ["/bin/bash"]
 
 
 # Runner image
-FROM hera-base as hera-runner
+FROM hera-base as hera-runner-base
 
 ARG cnb_gid=1000
 ARG cnb_uid=1002
@@ -23,7 +23,7 @@ USER ${cnb_uid}:${cnb_gid}
 
 
 # Builder image
-FROM hera-base AS hera-builder
+FROM hera-base AS hera-builder-base
 
 ARG apt_get_build_dependencies="clang make"
 ARG apt_get_parameters="-y --no-install-recommends"
