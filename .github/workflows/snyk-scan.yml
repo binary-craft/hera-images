@@ -5,6 +5,7 @@ on:
     paths-ignore: ['**.md', '.gitignore', 'LICENSE']
   pull_request:
     branches: [main]
+  workflow_dispatch:
   schedule:
     - cron: '53 7 * * 3'
 
