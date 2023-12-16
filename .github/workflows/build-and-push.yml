@@ -13,6 +13,16 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v4
 
+      - name: Build hera-builder-base for testing
+        run: docker build --target hera-builder-base -t hera-builder-base:testing .
+
+      - name: Build hera-runner-base for testing
+        run: docker build --target hera-runner-base -t hera-runner-base:testing .
+
+      - name: Run test
+        working-directory: test
+        run: bash run-test.sh
+
       - name: Get current date
         id: date
         run: |
