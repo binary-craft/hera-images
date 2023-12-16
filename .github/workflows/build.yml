@@ -28,11 +28,18 @@ jobs:
       #    push: false
       #    target: hera-runner-base
 
+      - name: Get current date
+        id: date
+        run: |
+          date=$(date +'%Y%m%d')
+          echo "date=${date}" >> $GITHUB_OUTPUT
+
       - name: Build hera-builder-base
         uses: docker/build-push-action@v5
         with:
           platforms: linux/amd64,linux/arm64
           push: false
+          load: true
           tags: ${{ vars.DOCKER_NAMESPACE }}/hera-builder-base:jammy,${{ vars.DOCKER_NAMESPACE }}/hera-builder-base:jammy-${{ steps.date.outputs.date }}
           target: hera-builder-base
 
@@ -41,6 +48,7 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           push: false
+          load: true
           tags: ${{ vars.DOCKER_NAMESPACE }}/hera-runner-base:jammy,${{ vars.DOCKER_NAMESPACE }}/hera-runner-base:jammy-${{ steps.date.outputs.date }}
           target: hera-runner-base
 
