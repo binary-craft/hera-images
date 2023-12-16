@@ -1,4 +1,4 @@
-FROM pimhuisman/hera-runner-base:jammy
+FROM hera-runner-base:testing
 
 ENV HELLO_ORIGIN="runner"
 COPY test-hello.sh .

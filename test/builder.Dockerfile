@@ -1,4 +1,4 @@
-FROM pimhuisman/hera-builder-base:jammy
+FROM hera-builder-base:testing
 
 ENV HELLO_ORIGIN="builder"
 COPY test-hello.sh .
