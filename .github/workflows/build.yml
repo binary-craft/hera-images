@@ -43,7 +43,6 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          load: true
           tags: ${{ vars.DOCKER_NAMESPACE }}/hera-builder-base:jammy,${{ vars.DOCKER_NAMESPACE }}/hera-builder-base:jammy-${{ steps.date.outputs.date }}
           target: hera-builder-base
 
@@ -52,6 +51,5 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          load: true
           tags: ${{ vars.DOCKER_NAMESPACE }}/hera-runner-base:jammy,${{ vars.DOCKER_NAMESPACE }}/hera-runner-base:jammy-${{ steps.date.outputs.date }}
           target: hera-runner-base
