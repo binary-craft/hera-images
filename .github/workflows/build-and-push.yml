@@ -13,15 +13,6 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v4
 
-      - name: Get current date
-        id: date
-        run: |
-          date=$(date +'%Y%m%d')
-          echo "date=${date}" >> $GITHUB_OUTPUT
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
       - name: Build hera-builder-base for testing
         run: docker build --target hera-builder-base -t hera-builder-base:testing .
 
@@ -31,6 +22,15 @@ jobs:
       - name: Run test
         working-directory: test
         run: bash run-test.sh
+
+      - name: Get current date
+        id: date
+        run: |
+          date=$(date +'%Y%m%d')
+          echo "date=${date}" >> $GITHUB_OUTPUT
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
