@@ -55,7 +55,11 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push hera-builder-base
-        run: docker push ${{ vars.DOCKER_NAMESPACE }}/hera-builder-base:jammy,${{ vars.DOCKER_NAMESPACE }}/hera-builder-base:jammy-${{ steps.date.outputs.date }}
+        run: |
+          docker push ${{ vars.DOCKER_NAMESPACE }}/hera-builder-base:jammy
+          docker push ${{ vars.DOCKER_NAMESPACE }}/hera-builder-base:jammy-${{ steps.date.outputs.date }}
 
       - name: Push hera-runner-base
-        run: docker push ${{ vars.DOCKER_NAMESPACE }}/hera-runner-base:jammy,${{ vars.DOCKER_NAMESPACE }}/hera-runner-base:jammy-${{ steps.date.outputs.date }}
+        run: |
+          docker push ${{ vars.DOCKER_NAMESPACE }}/hera-runner-base:jammy
+          docker push ${{ vars.DOCKER_NAMESPACE }}/hera-runner-base:jammy-${{ steps.date.outputs.date }}

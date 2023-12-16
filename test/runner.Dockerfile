@@ -3,7 +3,7 @@ FROM pimhuisman/hera-runner-base:jammy
 ENV HELLO_ORIGIN="runner"
 COPY test-hello.sh .
 
-# Check that none of the builder software is installed.
+# Make sure that no builder software is installed.
 RUN ! command -v clang >/dev/null 2>&1 || { exit 1; }
 RUN ! command -v cmake >/dev/null 2>&1 || { exit 1; }
 RUN ! command -v conan >/dev/null 2>&1 || { exit 1; }
