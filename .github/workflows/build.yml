@@ -22,21 +22,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build hera-builder-base
-        uses: docker/build-push-action@v5
-        with:
-          push: false
-          load: true
-          tags: hera-builder-base:testing
-          target: hera-builder-base
+      - name: Build hera-builder-base for testing
+        run: docker build --target hera-builder-base -t hera-builder-base:testing .
 
-      - name: Build hera-runner-base
-        uses: docker/build-push-action@v5
-        with:
-          push: false
-          load: true
-          tags: hera-runner-base:testing
-          target: hera-runner-base
+      - name: Build hera-runner-base for testing
+        run: docker build --target hera-runner-base -t hera-runner-base:testing .
 
       - name: Run test
         working-directory: test
@@ -52,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           platforms: linux/amd64,linux/arm64
-          push: false
+          push: true
           load: true
           tags: ${{ vars.DOCKER_NAMESPACE }}/hera-builder-base:jammy,${{ vars.DOCKER_NAMESPACE }}/hera-builder-base:jammy-${{ steps.date.outputs.date }}
           target: hera-builder-base
@@ -61,7 +51,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           platforms: linux/amd64,linux/arm64
-          push: false
+          push: true
           load: true
           tags: ${{ vars.DOCKER_NAMESPACE }}/hera-runner-base:jammy,${{ vars.DOCKER_NAMESPACE }}/hera-runner-base:jammy-${{ steps.date.outputs.date }}
           target: hera-runner-base
