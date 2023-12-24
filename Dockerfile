@@ -51,11 +51,5 @@ WORKDIR /home/hera
 COPY $pip_requirements_file .
 RUN xargs -I % pipx install "%" < requirements.txt
 
-# Install VCPKG
-RUN git clone --depth 1 https://github.com/Microsoft/vcpkg.git .local/vcpkg
-ENV VCPKG_FORCE_SYSTEM_BINARIES=1
-RUN .local/vcpkg/bootstrap-vcpkg.sh --disableMetrics
-RUN ln -s ~/.local/vcpkg/vcpkg ~/.local/bin/vcpkg
-
 # Detect Conan profile
 RUN conan profile detect
