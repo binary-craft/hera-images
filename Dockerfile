@@ -1,8 +1,8 @@
 # Base image
 FROM ubuntu:jammy AS hera-base
 
-LABEL io.buildpacks.stack.id="com.github.pimhuisman.stacks.hera"
-ENV CNB_STACK_ID="com.github.pimhuisman.stacks.hera"
+LABEL io.buildpacks.stack.id="net.binarycraft.stacks.hera"
+ENV CNB_STACK_ID="net.binarycraft.stacks.hera"
 
 # Set default entrypoint (will be overriden in case of buildpack)
 ENTRYPOINT ["/bin/bash"]
@@ -27,7 +27,7 @@ FROM hera-base AS hera-builder-base
 
 ARG apt_get_build_dependencies="clang make"
 ARG apt_get_parameters="-y --no-install-recommends"
-ARG apt_get_system_dependencies="jq python3 pipx"
+ARG apt_get_system_dependencies="curl git jq python3 pipx unzip zip"
 ARG cnb_gid=1000
 ARG cnb_uid=1001
 ARG pip_requirements_file="requirements.txt"
@@ -50,6 +50,12 @@ WORKDIR /home/hera
 # Install pip dependencies
 COPY $pip_requirements_file .
 RUN xargs -I % pipx install "%" < requirements.txt
+
+# Install VCPKG
+RUN git clone --depth 1 https://github.com/Microsoft/vcpkg.git .local/vcpkg
+ENV VCPKG_FORCE_SYSTEM_BINARIES=1
+RUN .local/vcpkg/bootstrap-vcpkg.sh --disableMetrics
+RUN ln -s ~/.local/vcpkg/vcpkg ~/.local/bin/vcpkg
 
 # Detect Conan profile
 RUN conan profile detect

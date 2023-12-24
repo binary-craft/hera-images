@@ -1,7 +1,7 @@
 # Hera CNB images for native (C and C++)
-[![Build and push](https://github.com/pim-huisman/hera-images/actions/workflows/build-and-push.yml/badge.svg)](https://github.com/pim-huisman/hera-images/actions/workflows/build-and-push.yml) 
-[![Check for Ubuntu updates](https://github.com/pim-huisman/hera-images/actions/workflows/check-ubuntu-updates.yml/badge.svg)](https://github.com/pim-huisman/hera-images/actions/workflows/check-ubuntu-updates.yml) 
-[![Snyk scan](https://github.com/pim-huisman/hera-images/actions/workflows/snyk-scan.yml/badge.svg)](https://github.com/pim-huisman/hera-images/actions/workflows/snyk-scan.yml)
+[![Build and push](https://github.com/binary-craft/hera-images/actions/workflows/build-and-push.yml/badge.svg)](https://github.com/binary-craft/hera-images/actions/workflows/build-and-push.yml) 
+[![Check for Ubuntu updates](https://github.com/binary-craft/hera-images/actions/workflows/check-ubuntu-updates.yml/badge.svg)](https://github.com/binary-craft/hera-images/actions/workflows/check-ubuntu-updates.yml) 
+[![Snyk scan](https://github.com/binary-craft/hera-images/actions/workflows/snyk-scan.yml/badge.svg)](https://github.com/binary-craft/hera-images/actions/workflows/snyk-scan.yml)
 
 ## About
 This project is used to build Cloud Native Buildpack ready images for native applications written in C and C++.
@@ -22,14 +22,14 @@ With the builder image you can use your favourite builder and packaging software
 The published images will be made available on Docker hub. This project contains the source and is used to build the images.
 
 ### Builder image
-See [Docker hub](https://hub.docker.com/r/pimhuisman/hera-builder-base).
+See [Docker hub](https://hub.docker.com/r/bincraft/hera-builder-base).
 
-```docker pull pimhuisman/hera-builder-base:jammy```
+```docker pull bincraft/hera-builder-base:jammy```
 
 ### Runner image
-See [Docker hub](https://hub.docker.com/r/pimhuisman/hera-runner-base).
+See [Docker hub](https://hub.docker.com/r/bincraft/hera-runner-base).
 
-```docker pull pimhuisman/hera-runner-base:jammy```
+```docker pull bincraft/hera-runner-base:jammy```
 
 ## Building the images
 There are three stages within the Dockerfile:
