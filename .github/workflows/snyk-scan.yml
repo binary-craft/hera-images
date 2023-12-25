@@ -39,9 +39,9 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --sarif-file-output=sarifs/python.sarif
+          args: --sarif-file-output=python.sarif
 
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: ./sarifs/
+          sarif_file: .
